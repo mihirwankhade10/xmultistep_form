@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-step Form</title>
+  <meta name="description" content="A multi-step subscription form with plan selection, add-ons, and billing summary." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<main class="app">
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar">
+    <ol class="steps">
+      <li class="step-item active" data-step="1">
+        <span class="step-number">1</span>
+        <div class="step-text">
+          <span class="step-label">Step 1</span>
+          <strong class="step-title">Your Info</strong>
+        </div>
+      </li>
+      <li class="step-item" data-step="2">
+        <span class="step-number">2</span>
+        <div class="step-text">
+          <span class="step-label">Step 2</span>
+          <strong class="step-title">Select Plan</strong>
+        </div>
+      </li>
+      <li class="step-item" data-step="3">
+        <span class="step-number">3</span>
+        <div class="step-text">
+          <span class="step-label">Step 3</span>
+          <strong class="step-title">Add-ons</strong>
+        </div>
+      </li>
+      <li class="step-item" data-step="4">
+        <span class="step-number">4</span>
+        <div class="step-text">
+          <span class="step-label">Step 4</span>
+          <strong class="step-title">Summary</strong>
+        </div>
+      </li>
+    </ol>
+  </aside>
+
+  <!-- ========== CONTENT ========== -->
+  <section class="content">
+    <form id="multistep-form" novalidate>
+
+      <!-- STEP 1: Your Info -->
+      <section class="step" id="step-1">
+        <h1 class="step-heading">Personal Info</h1>
+        <p class="step-description">Please provide your name, email address, and phone number.</p>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="userName">Name</label>
+            <span class="error" id="error-name"></span>
+          </div>
+          <input type="text" id="userName" name="userName" placeholder="e.g. Stephen King" />
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="email">Email Address</label>
+            <span class="error" id="error-email"></span>
+          </div>
+          <input type="email" id="email" name="email" placeholder="e.g. stephenking@lorem.com" />
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="phone">Phone Number</label>
+            <span class="error" id="error-phone"></span>
+          </div>
+          <input type="tel" id="phone" name="phone" placeholder="e.g. +1 234 567 890" />
+        </div>
+      </section>
+
+      <!-- STEP 2: Select Plan -->
+      <section class="step" id="step-2" hidden>
+        <h1 class="step-heading">Select Your Plan</h1>
+        <p class="step-description">You have the option of monthly or yearly billing.</p>
+
+        <div class="plan-cards">
+          <div class="plan_card" tabindex="0" role="radio" aria-checked="false" data-plan="arcade">
+            <img src="assets/images/icon-arcade.svg" alt="Arcade" class="plan-icon" />
+            <div class="plan-info">
+              <strong class="plan-name">Arcade</strong>
+              <span class="plan-price">$9/mo</span>
+              <span class="plan-yearly-benefit hidden">2 months free</span>
+            </div>
+          </div>
+          <div class="plan_card" tabindex="0" role="radio" aria-checked="false" data-plan="advance">
+            <img src="assets/images/icon-advanced.svg" alt="Advance" class="plan-icon" />
+            <div class="plan-info">
+              <strong class="plan-name">Advance</strong>
+              <span class="plan-price">$12/mo</span>
+              <span class="plan-yearly-benefit hidden">2 months free</span>
+            </div>
+          </div>
+          <div class="plan_card" tabindex="0" role="radio" aria-checked="false" data-plan="pro">
+            <img src="assets/images/icon-pro.svg" alt="Pro" class="plan-icon" />
+            <div class="plan-info">
+              <strong class="plan-name">Pro</strong>
+              <span class="plan-price">$15/mo</span>
+              <span class="plan-yearly-benefit hidden">2 months free</span>
+            </div>
+          </div>
+        </div>
+
+        <span class="error plan-error" id="error-plan"></span>
+
+        <div class="toggle-billing">
+          <span class="toggle-label monthly-label active-label">Monthly</span>
+          <button type="button" class="toggle-switch" id="billing-toggle" aria-label="Toggle billing period">
+            <span class="toggle-knob"></span>
+          </button>
+          <span class="toggle-label yearly-label">Yearly</span>
+        </div>
+      </section>
+
+      <!-- STEP 3: Add-ons -->
+      <section class="step" id="step-3" hidden>
+        <h1 class="step-heading">Pick add-ons</h1>
+        <p class="step-description">Add-ons help enhance your gaming experience.</p>
+
+        <div class="addon-cards">
+          <div class="addon_card" tabindex="0" role="checkbox" aria-checked="false" data-addon="online">
+            <div class="addon-checkbox">
+              <img src="assets/images/icon-checkmark.svg" alt="" class="checkmark-icon" />
+            </div>
+            <div class="addon-info">
+              <strong class="addon-name">Online Services</strong>
+              <span class="addon-desc">Access to multiplayer games</span>
+            </div>
+            <span class="addon-price">+$1/mo</span>
+          </div>
+          <div class="addon_card" tabindex="0" role="checkbox" aria-checked="false" data-addon="storage">
+            <div class="addon-checkbox">
+              <img src="assets/images/icon-checkmark.svg" alt="" class="checkmark-icon" />
+            </div>
+            <div class="addon-info">
+              <strong class="addon-name">Larger Storage</strong>
+              <span class="addon-desc">Extra 1TB of cloud save</span>
+            </div>
+            <span class="addon-price">+$2/mo</span>
+          </div>
+          <div class="addon_card" tabindex="0" role="checkbox" aria-checked="false" data-addon="profile">
+            <div class="addon-checkbox">
+              <img src="assets/images/icon-checkmark.svg" alt="" class="checkmark-icon" />
+            </div>
+            <div class="addon-info">
+              <strong class="addon-name">Customizable Profile</strong>
+              <span class="addon-desc">Custom theme on your profile</span>
+            </div>
+            <span class="addon-price">+$2/mo</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: Summary -->
+      <section class="step" id="step-4" hidden>
+        <h1 class="step-heading">Finishing up</h1>
+        <p class="step-description">Double-check everything looks OK before confirming.</p>
+
+        <div class="summary-box">
+          <div class="summary-plan">
+            <div class="summary-plan-info">
+              <strong class="summary-plan-name" id="summary-plan-name">Arcade (Monthly)</strong>
+              <a href="#" class="summary-change" id="summary-change">Change</a>
+            </div>
+            <strong class="summary-plan-price" id="summary-plan-price">$9/mo</strong>
+          </div>
+          <div class="summary-addons" id="summary-addons">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <div class="summary-total">
+          <span class="summary-total-label" id="summary-total-label">Total (per month)</span>
+          <strong class="summary-total-price" id="summary-total-price">+$12/mo</strong>
+        </div>
+      </section>
+
+    </form>
+
+    <!-- THANK YOU -->
+    <section class="thank-you" id="thank-you" hidden>
+      <img src="assets/images/icon-thank-you.svg" alt="" class="thank-you-icon" />
+      <h2>Thank You!</h2>
+      <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.</p>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="nav" id="nav">
+      <button type="button" id="back-button" class="btn-back" hidden>Go Back</button>
+      <button type="button" id="next-button" class="btn-next">Next Step</button>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
