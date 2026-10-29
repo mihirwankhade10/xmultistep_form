@@ -397,31 +397,30 @@ img {
 }
 
 .addon-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
   width: 20px;
   height: 20px;
   border: 1px solid var(--light-gray);
   border-radius: 4px;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  background-color: var(--white);
+  transition: background-color 0.2s, border-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  transition: background-color 0.2s, border-color 0.2s;
 }
 
-.addon_card.selected .addon-checkbox {
+.addon_card.selected .addon-checkbox,
+.addon-checkbox:checked {
   background-color: var(--purplish-blue);
   border-color: var(--purplish-blue);
-}
-
-.checkmark-icon {
-  width: 12px;
-  height: 9px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.addon_card.selected .checkmark-icon {
-  opacity: 1;
+  background-image: url("assets/images/icon-checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .addon-info {

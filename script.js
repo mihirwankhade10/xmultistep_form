@@ -392,25 +392,47 @@ yearlyLabel.addEventListener('click', () => {
 });
 
 // Add-on selection
-function toggleAddon(addonKey, card) {
+function toggleAddon(addonKey, card, explicitChecked) {
+  const checkbox = card.querySelector('input[type="checkbox"]');
   const index = state.addons.indexOf(addonKey);
-  if (index > -1) {
-    state.addons.splice(index, 1);
-    card.classList.remove('selected');
-    card.setAttribute('aria-checked', 'false');
-  } else {
-    state.addons.push(addonKey);
+  const shouldBeChecked = explicitChecked !== undefined ? explicitChecked : !(index > -1);
+
+  if (checkbox) {
+    checkbox.checked = shouldBeChecked;
+  }
+
+  if (shouldBeChecked) {
+    if (index === -1) {
+      state.addons.push(addonKey);
+    }
     card.classList.add('selected');
     card.setAttribute('aria-checked', 'true');
+  } else {
+    if (index > -1) {
+      state.addons.splice(index, 1);
+    }
+    card.classList.remove('selected');
+    card.setAttribute('aria-checked', 'false');
   }
 }
 
 addonCards.forEach(card => {
   const addonKey = card.getAttribute('data-addon');
+  const checkbox = card.querySelector('input[type="checkbox"]');
 
-  card.addEventListener('click', () => {
-    toggleAddon(addonKey, card);
+  card.addEventListener('click', (e) => {
+    if (e.target === checkbox) {
+      toggleAddon(addonKey, card, checkbox.checked);
+    } else {
+      toggleAddon(addonKey, card);
+    }
   });
+
+  if (checkbox) {
+    checkbox.addEventListener('change', () => {
+      toggleAddon(addonKey, card, checkbox.checked);
+    });
+  }
 
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
